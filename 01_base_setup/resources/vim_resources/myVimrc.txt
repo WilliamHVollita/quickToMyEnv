@@ -1,0 +1,312 @@
+"支持UTF-8编码
+"大部分情况下，进行Python开发时你应该使用UTF-8编码，尤其是使用Python 3的时候。确保Vim设置文件中有下面的命令：
+set encoding=utf-8
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+"设置行号
+set number
+
+"设置缩进长度为四
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set autoindent
+
+"设置关闭鼠标模式，否则会干扰右键快速粘贴等操作
+set mouse=
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
+
+" 目录树
+Plugin 'preservim/nerdtree'
+" 自动格式化
+Plugin 'Chiel92/vim-autoformat'
+
+"不同颜色区分括号匹配
+Plugin 'kien/rainbow_parentheses.vim'
+
+"强大的状态栏
+Plugin 'https://github.com/bling/vim-airline'
+
+"共享NerdTree
+Plugin 'https://github.com/jistr/vim-nerdtree-tabs'
+
+let g:nerdtree_tabs_open_on_console_startup=1  "设置共享NerdTree
+let NERDTreeWinSize=27  "设置NerdTree宽度
+
+" 全局搜索
+Plugin 'kien/ctrlp.vim'
+" 后按下C-P，便可以全局搜索啦。使用C-j,
+" C-k上下翻页，<Enter>打开选中文件。同样，给出一些有用的配置：
+let g:ctrlp_working_path_mode = 'ra'
+set wildignore+=*/tmp/*,*/node_modules/*,*.so,*.swp,*.zip,*.pyc
+"let g:ctrlp_custom_ignore = {'dir':  '\v[\/]\.(git|hg|svn)$', 'file': '\v\.(exe|so|dll)$'}
+let g:ctrlp_custom_ignore = {'dir':  '\v[\/]\.(git|hg|svn)$', 'file': '\v\.(exe|so|dll|jpg|png|jpeg)$'}
+
+" 注释、反注释
+"NERDCommenter是个不错的工具，支持非常多的语言：
+Plugin 'scrooloose/nerdcommenter'   " commenter: \cc \cu
+"然后按下\cc来注释当前航，\cu来反注释，\c<space>来切换注释。其中的\\是可以设置的：
+
+"
+" ag: Silver Searcher
+Plugin 'mileszs/ack.vim'
+
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
+
+"Set mapleader
+let mapleader = ","
+
+"Fast reloading of the .vimrc
+map <silent> <leader>ss :source ~/.vimrc<cr>
+"Fast editing of .vimrc
+map <silent> <leader>ee :e ~/.vimrc<cr>
+"When .vimrc is edited, reload it
+autocmd! bufwritepost .vimrc source ~/.vimrc
+
+let Tlist_Ctags_Cmd = 'ctags'
+let Tlist_Show_One_File = 1            "不同时显示多个文件的tag，只显示当前文件的
+let Tlist_Exit_OnlyWindow = 1          "如果taglist窗口是最后一个窗口，则退出vim
+let Tlist_Use_Right_Window = 1         "在右侧窗口中显示taglist窗口
+
+"map <silent> <F9> :TlistToggle<cr>
+
+filetype plugin indent on
+
+autocmd FileType c,cpp set shiftwidth=4 | set expandtab
+syntax enable
+
+colorscheme wombat256mod
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" cscope setting
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+if has("cscope")
+  set csprg=/usr/bin/cscope
+  set csto=1
+  set cst
+  set nocsverb
+  " add any database in current directory
+  if filereadable("cscope.out")
+      cs add cscope.out
+  endif
+  set csverb
+endif
+
+inoremap ( ()<ESC>i
+inoremap [ []<ESC>i
+inoremap { {}<ESC>i
+inoremap < <><ESC>i
+inoremap ' ''<ESC>i
+inoremap " ""<ESC>i
+
+nmap <C-@>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+nmap <C-@>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+nmap <C-@>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+nmap <C-@>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+nmap <C-@>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+nmap <C-@>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
+nmap <C-@>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+nmap <C-@>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+
+"""QuickFix
+autocmd FileType c,cpp  map <buffer> <leader><space> :w<cr>:make<cr>
+nmap <leader>cn :cn<cr>
+nmap <leader>cp :cp<cr>
+nmap <leader>cw :cw 10<cr> 
+
+nmap <leader>lv :lv /<c-r>=expand("<cword>")<cr>/ %<cr>:lw<cr>
+
+
+""NerdTree
+map <F2> :NERDTreeMirror<CR>
+map <F2> :NERDTreeToggle<CR>
+
+"autocmd vimenter * NERDTree  "自动开启Nerdtree
+let g:NERDTreeWinSize = 20 "设定 NERDTree 视窗大小
+"开启/关闭nerdtree快捷键
+" map <C-f> :NERDTreeToggle<CR>
+"let NERDTreeShowBookmarks=1  " 开启Nerdtree时自动显示Bookmarks
+"打开vim时如果没有文件自动打开NERDTree
+autocmd vimenter * if !argc()|NERDTree|endif
+"当NERDTree为剩下的唯一窗口时自动关闭
+"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+"设置树的显示图标
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
+let NERDTreeIgnore = ['\.pyc$']  " 过滤所有.pyc文件不显示
+"let g:NERDTreeShowLineNumbers=1  " 是否显示行号
+let NERDTreeShowHidden=1    "显示隐藏文件
+"Making it prettier
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
+"let NERDTreeWinPos="right" "将NERDTree设置到vim窗口的右侧（默认为左侧）
+
+""窗口移动
+" vim的默认窗口移动方式是Ctrl+w Ctrl+hjkl，
+"但是这样太过复杂，对此进行绑定：
+"nnoremap <C-J> <C-W><C-J>
+"nnoremap <C-K> <C-W><C-K>
+"nnoremap <C-L> <C-W><C-L>
+"nnoremap <C-H> <C-W><C-H>
+
+"设置标签页切换快捷键
+let mapleader = ','
+nnoremap <C-l> gt
+nnoremap <C-h> gT
+nnoremap <leader>t : tabe<CR>
+
+ "打开tabline功能,方便查看Buffer和切换，这个功能比较不错"
+ "我还省去了minibufexpl插件，因为我习惯在1个Tab下用多个buffer"
+ let g:airline#extensions#tabline#enabled = 1
+ let g:airline#extensions#tabline#buffer_nr_show = 1
+
+ "设置切换Buffer快捷键"
+" nnoremap <C-N> :bn<CR>
+ "nnoremap <C-P> :bp<CR>
+
+ " 关闭状态显示空白符号计数,这个对我用处不大"
+ let g:airline#extensions#whitespace#enabled = 0
+
+"" for python
+let python_highlight_all=1
+au Filetype python set tabstop=4
+au Filetype python set softtabstop=4
+au Filetype python set shiftwidth=4
+au Filetype python set textwidth=79
+au Filetype python set expandtab
+au Filetype python set autoindent
+au Filetype python set fileformat=unix
+autocmd Filetype python set foldmethod=indent
+autocmd Filetype python set foldlevel=99
+
+"自动执行：按一下F5，自动执行代码：
+map <F5> :call CompileRunGcc()<CR>
+func! CompileRunGcc()
+        exec "w"
+        if &filetype == 'c'
+                exec "!g++ % -o %<"
+                exec "!time ./%<"
+        elseif &filetype == 'cpp'
+                exec "!g++ % -o %<"
+                exec "!time ./%<"
+        elseif &filetype == 'java'
+                exec "!javac %"
+                exec "!time java %<"
+        elseif &filetype == 'sh'
+                :!time bash %
+        elseif &filetype == 'python'
+                exec "!clear"
+                exec "!time python3 %"
+        elseif &filetype == 'html'
+                exec "!firefox % &"
+        elseif &filetype == 'go'
+                " exec "!go build %<"
+                exec "!time go run %"
+        elseif &filetype == 'mkd'
+                exec "!~/.vim/markdown.pl % > %.html &"
+                exec "!firefox %.html &"
+        endif
+endfunc
+
+" 自动格式化
+"这款插件需要已经安装有代码格式化工具，安装方式是在终端下执行：
+" pip install autopep8
+"推荐的配置是：
+
+"Plugin 'Chiel92/vim-autoformat'
+"nnoremap <F6> :Autoformat<CR>
+let g:autoformat_autoindent = 0
+let g:autoformat_retab = 0
+let g:autoformat_remove_trailing_spaces = 0
+"每次在normal环境下按F6便可以格式化代码
+
+""使用不同的颜色高亮匹配的括号：
+let g:rbpt_colorpairs = [
+                        \ ['brown',       'RoyalBlue3'],
+                        \ ['Darkblue',    'SeaGreen3'],
+                        \ ['darkgray',    'DarkOrchid3'],
+                        \ ['darkgreen',   'firebrick3'],
+                        \ ['darkcyan',    'RoyalBlue3'],
+                        \ ['darkred',     'SeaGreen3'],
+                        \ ['darkmagenta', 'DarkOrchid3'],
+                        \ ['brown',       'firebrick3'],
+                        \ ['gray',        'RoyalBlue3'],
+                        \ ['darkmagenta', 'DarkOrchid3'],
+                        \ ['Darkblue',    'firebrick3'],
+                        \ ['darkgreen',   'RoyalBlue3'],
+                        \ ['darkcyan',    'SeaGreen3'],
+                        \ ['darkred',     'DarkOrchid3'],
+                        \ ['red',         'firebrick3'],
+                        \ ]
+let g:rbpt_max = 16
+let g:rbpt_loadcmd_toggle = 0
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
+
+
+" 全局搜索
+"Plugin 'kien/ctrlp.vim'
+" 后按下C-P，便可以全局搜索啦。使用C-j,
+" C-k上下翻页，<Enter>打开选中文件。同样，给出一些有用的配置：
+let g:ctrlp_working_path_mode = 'ra'
+set wildignore+=*/tmp/*,*/node_modules/*,*.so,*.swp,*.zip,*.pyc
+"let g:ctrlp_custom_ignore = {'dir':  '\v[\/]\.(git|hg|svn)$', 'file': '\v\.(exe|so|dll)$'}
+let g:ctrlp_custom_ignore = {'dir':  '\v[\/]\.(git|hg|svn)$', 'file': '\v\.(exe|so|dll|jpg|png|jpeg)$'}
+
+" 注释、反注释
+"NERDCommenter是个不错的工具，支持非常多的语言：
+"Plugin 'scrooloose/nerdcommenter'   " commenter: \cc \cu
+"然后按下\cc来注释当前航，\cu来反注释，\c<space>来切换注释。其中的\\是可以设置的：
+"let mapleader=';'
+
+" 
+" ag: Silver Searcher
+" Plugin 'mileszs/ack.vim'
+let g:ackprg = 'ag --nogroup --nocolor --column'
+" 在普通模式下输入F4,便可以自动输入`:Ack`
+"map <F4> :Ack<space>
+
+" 支持系统剪切板
+" 你要检查一下你的vim，是否支持系统剪板。
+" vim --version | grep clipboard
+" 如果没有，ubuntu需要安装： vim-gtk
+"sudo apt-get install vim-gtk
+set clipboard=unnamed
+
+"你在Vim中copy的所有内容都会上系统剪切板。
+"在Vim中拷贝内容时，可以切换到拷贝模式防止自动缩进和补全。
+"我的快捷键是<F9>：
+"Paste toggle
+"nnoremap <F9> :set invpaste paste?<CR>
+"set pastetoggle=<F9>
+"set showmode
+
+au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
