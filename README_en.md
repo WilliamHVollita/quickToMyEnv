@@ -5,12 +5,14 @@ a set of shell scripts that allows you to set up your own customized Linux envir
 
 <br/>
 <br/>
+
 ## **basic setup**
 ------------------
 
 this folder contains some basic installation scripts, previously including oh-my-zsh, vim with some useful bundles, neofetch, common programming tools
 
 <br/>
+
 ### 01_setup_essential-tools.sh
 -------------------------------
 
@@ -19,6 +21,7 @@ this file contains the installation of neofetch and some common programming tool
 you can just edit the variables in the script to modify the packages you want to install
 
 <br/>
+
 ### 02_setup_zsh.sh
 -------------------
 
@@ -37,6 +40,7 @@ I'd suggest you name your scripts after an order number as what I'm doing, in wh
 
 <br/>
 <br/>
+
 ## **advanced setup**
 ---------------------
 
@@ -50,6 +54,7 @@ you can find more detail about this script at <https://zhuanlan.zhihu.com/p/5190
 
 <br/>
 <br/>
+
 ## **push-up.sh / push-up.bat**
 -------------------------------
 
