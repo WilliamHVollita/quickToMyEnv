@@ -1,22 +1,26 @@
 # **quickToMyEnv**
+==================
 
 a set of shell scripts that allows you to set up your own customized Linux environment as convenient and fast as possible
 
 
 
 
-### **basic setup**
+## **basic setup**
+------------------
 
 this folder contains some basic installation scripts, previously including oh-my-zsh, vim with some useful bundles, neofetch, common programming tools
 
 
-##### 01_setup_essential-tools.sh
+### 01_setup_essential-tools.sh
+-------------------------------
 
 this file contains the installation of neofetch and some common programming tools, including python3 and c/c++ environment by default
 
 you can just edit the variables in the script to modify the packages you want to install
 
-##### 02_setup_zsh.sh
+### 02_setup_zsh.sh
+-------------------
 
 this script file is an edited copy of the official oh-my-zsh installation script file
 
@@ -36,7 +40,8 @@ I'd suggest you name your scripts after an order number as what I'm doing, in wh
 
 
 
-### **advanced setup**
+## **advanced setup**
+---------------------
 
 this folder contains installation scripts that suit various particular usage scenarios
 
@@ -49,7 +54,8 @@ you can find more detail about this script at <https://zhuanlan.zhihu.com/p/5190
 
 
 
-### **push-up.sh / push-up.bat**
+## **push-up.sh / push-up.bat**
+-------------------------------
 
 Eventually, you have decided to copy this repo into your own GitHub account and modify it
 
