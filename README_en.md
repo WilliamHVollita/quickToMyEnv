@@ -2,6 +2,8 @@
 ------------------
 
 a set of shell scripts that allows you to set up your own customized Linux environment as convenient and fast as possible
++ 点击 [这里](https://github.com/W-William/quickToMyEnv/README.md) 来显示中文
++ Warning: most scripts in this scripts set are only for Debian/Ubuntu OS and those who uses apt as package manager
 
 <br/>
 <br/>
